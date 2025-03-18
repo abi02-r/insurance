@@ -1,0 +1,38 @@
+import React, { useState } from 'react';
+
+// Sample glossary terms
+const glossaryTerms = [
+  { term: 'Beneficiary', definition: 'A person designated to receive benefits from an insurance policy or annuity.' },
+  { term: 'Deductible', definition: 'The amount paid out of pocket by the policyholder before an insurance provider will pay any expenses.' },
+  // Add more terms here
+];
+
+function Glossary() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredTerms = glossaryTerms.filter(({ term }) =>
+    term.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-4">Insurance Glossary</h2>
+      <input
+        type="text"
+        placeholder="Search terms..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="mb-4 p-2 border border-gray-300 rounded"
+      />
+      <ul>
+        {filteredTerms.map(({ term, definition }) => (
+          <li key={term} className="mb-2">
+            <strong>{term}:</strong> {definition}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Glossary;
