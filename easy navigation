@@ -1,38 +1,45 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
-// Sample glossary terms
-const glossaryTerms = [
-  { term: 'Beneficiary', definition: 'A person designated to receive benefits from an insurance policy or annuity.' },
-  { term: 'Deductible', definition: 'The amount paid out of pocket by the policyholder before an insurance provider will pay any expenses.' },
-  // Add more terms here
+const glossaryData = [
+  // Insurance terms and definitions will be inserted here from the three sources
 ];
 
-function Glossary() {
-  const [searchTerm, setSearchTerm] = useState('');
+const comparisonData = [
+  // 25 comparison terms in flashcards format
+];
 
-  const filteredTerms = glossaryTerms.filter(({ term }) =>
-    term.toLowerCase().includes(searchTerm.toLowerCase())
+const caseStudies = [
+  // 19 case studies in flashcards format
+];
+
+const formulas = [
+  // 7 insurance formulas for the calculator
+];
+
+export default function InsuranceWebsite() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredTerms = glossaryData.filter((item) =>
+    item.term.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Insurance Glossary</h2>
+    <div className="p-6 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Insurance Glossary</h1>
       <input
         type="text"
         placeholder="Search terms..."
+        className="w-full p-2 border rounded-md mb-4"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-4 p-2 border border-gray-300 rounded"
       />
-      <ul>
-        {filteredTerms.map(({ term, definition }) => (
-          <li key={term} className="mb-2">
-            <strong>{term}:</strong> {definition}
+      <ul className="space-y-2">
+        {filteredTerms.map((item, index) => (
+          <li key={index} className="p-3 bg-gray-100 rounded-md">
+            <strong>{item.term}:</strong> {item.definition}
           </li>
         ))}
       </ul>
     </div>
   );
 }
-
-export default Glossary;
